@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="per.wjf.bibased.mapper.GoodsMapperCustom" >
+  
+  
+   <sql id="query_goods_where">
+   
+   		<if test="goodsCustom!=null">
+   			<if test="goodsCustom.goodsname!=null and goodsCustom.goodsname!=''">
+   				goods.goodsname LIKE '%${goodsCustom.goodsname}%'
+   			</if>
+   		</if>
+	
+   </sql>
+   
+   <select id="findGoodsList" parameterType="per.wjf.bibased.po.GoodsVo" resultType="per.wjf.bibased.po.GoodsCustom">
+   
+           SELECT goods.* FROM goods  
+  		<where>
+  			<include refid="query_goods_where"></include>
+  		</where>
+            
+    </select>
+    
+    
+  	
+  	
+    
+</mapper>

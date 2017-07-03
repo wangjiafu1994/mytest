@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="per.wjf.bibased.mapper.OrderMapperCustom" >
+  
+  <select id="findLastOrder"  resultType="per.wjf.bibased.po.Myorder">
+		select * from myorder order by id desc limit 0,1
+	</select>
+	
+	 <select id="findOrderList" parameterType="int" resultType="per.wjf.bibased.po.Myorder">
+		select * from myorder LEFT JOIN `user` ON `user`.id =myorder.userid  WHERE userid=#{value}
+	</select>
+	
+	<select id="findOrderInfo" parameterType="int" resultType="per.wjf.bibased.po.Goods">
+		select * from orderdetail LEFT JOIN myorder on myorder.id=orderdetail.orderid 
+       LEFT JOIN goods ON orderdetail.goodsid=goods.id where orderid=#{value}
+	</select>
+	
+		<select id="findOrderdetailInfo" parameterType="int" resultType="per.wjf.bibased.po.GoodsCustom">
+		select * from orderdetail LEFT JOIN myorder on myorder.id=orderdetail.orderid 
+       LEFT JOIN goods ON orderdetail.goodsid=goods.id where orderid=#{value}
+	</select>
+	
+	
+	
+		<select id="findOrder"  resultType="per.wjf.bibased.po.OrderCustom">
+		select * from myorder LEFT JOIN `user`on user.id=myorder.userid where isorder="未接单"
+	</select>
+		
+</mapper>
